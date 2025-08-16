@@ -66,6 +66,7 @@ Watch out for a quick LED animation, then all the LEDs turn off
 - Use Raspberry Pi Imager to create a SD card with the OS 
 - Select Raspberry Pi OS Lite 64 Bit - you don't need the desktop 
 - Make sure you [set your wifi credentials](https://www.raspberrypi.com/documentation/computers/getting-started.html#raspberry-pi-imager) in the imager. I use MTM as the hostname and prog1 (or prog2 etc) as the username. Add your local wifi settings. Enable SSH. 
+- It takes 3-4 minutes for the Pi to initialise for the first time. 
 - Log into the Raspberry Pi over WIFI from terminal using SSH - [full instructions](https://www.raspberrypi.com/documentation/computers/remote-access.html#ssh).  
 
 
