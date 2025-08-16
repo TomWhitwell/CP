@@ -10,7 +10,8 @@ sudo apt install -y python3-pip python3-venv git build-essential flashrom
 echo "🔌 Enabling SPI..."
 sudo raspi-config nonint do_spi 0
 
-echo "Cloning the repo..."
+echo "💾 Cloning the repo..."
+cd /opt/
 sudo git clone https://github.com/TomWhitwell/CP
 cd CP
 

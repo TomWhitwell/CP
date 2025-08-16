@@ -3,12 +3,13 @@ Description=Computer Programmer
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/python3 /home/prog1/CP/flash-complete.py
-WorkingDirectory=/home/prog1/CP
-StandardOutput=append:/home/prog1/CP/logs/computer-programmer.log
-StandardError=append:/home/prog1/CP/logs/computer-programmer.log
+ExecStart=/usr/bin/python3 /opt/CP/flash-complete.py
+WorkingDirectory=/opt/CP
+StandardOutput=append:/var/log/CP/computer-programmer.log
+StandardError=append:/var/log/CP/computer-programmer.log
+User=pi
 Restart=always
-User=prog1
 
 [Install]
 WantedBy=multi-user.target
+
