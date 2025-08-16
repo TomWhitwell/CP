@@ -1,27 +1,30 @@
-# Flash Programmer for Winbond Chips
-
-This project runs on a Raspberry Pi Zero W 2 (or similar) to clone the contents of a Winbond SPI flash chip in slot 0 to other chips in slots 1–15 using a CD74HC154M demultiplexer for chip-select control and two 74HC595 shift registers for LED indication.
-
----
-
-## Features
-
-- Detects chips in all 16 slots on startup (**CHECK** button).
-- Reads source chip in slot 0 and clones to matching chips (**WRITE** button).
-- LED status indication for each slot:
-  - **ON** = success
-  - **OFF** = no chip
-  - **Blink slow** = present, correct size
-  - **Blink fast** = error
-  - **Data blink** = active read/write
+# Computer Programmer 
 
 ---
 
 ## Installation
 
-These steps assume a fresh Raspberry Pi OS install.
+
+### 1. Raspberry Pi Setup 
+
+- Use a Raspberry Pi Zero 2 W
+- Use Raspberry Pi Imager to create a SD card with the OS 
+- Select Raspberry Pi OS Lite 64 Bit - you don't need the desktop 
+- Make sure you [set your wifi credentials](https://www.raspberrypi.com/documentation/computers/getting-started.html#raspberry-pi-imager) in the imager. I use MTM as the hostname and prog1 (or prog2 etc) as the username. Add your local wifi settings. Enable SSH. 
+- Log into the Raspberry Pi over WIFI from terminal using SSH - [full instructions](https://www.raspberrypi.com/documentation/computers/remote-access.html#ssh).  
+
 
 ### 1. Update and install prerequisites
+
+
+
+
+
+
+
+
+
+
 
 Say yes to any questions 
 
@@ -32,8 +35,7 @@ sudo apt update && sudo apt full-upgrade -y
 sudo apt install -y python3-pip python3-venv git build-essential flashrom
 # Turn on SPI  
 sudo raspi-config nonint do_spi 0
-# Create project folder 
-
+# Clone 
 
 ````
 
