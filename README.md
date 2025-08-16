@@ -51,6 +51,9 @@ Watch out for a quick LED animation, then all the LEDs turn off
   - `sudo systemctl status computer-programmer.service` should return the most recent logs and errors 
   - Then just ask Tom 
 
+- If you want to play with the code it is installed into the `/opt/` folder 
+  - `cd /opt/` will get you there 
+
 
 
 
