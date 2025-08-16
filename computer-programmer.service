@@ -5,8 +5,8 @@ After=network.target
 [Service]
 ExecStart=/usr/bin/python3 /opt/CP/flash-complete.py
 WorkingDirectory=/opt/CP
-StandardOutput=append:/var/log/CP/computer-programmer.log
-StandardError=append:/var/log/CP/computer-programmer.log
+StandardOutput=append:/opt/CP/computer-programmer.log
+StandardError=append:/opt/CP/computer-programmer.log
 Restart=always
 
 [Install]
