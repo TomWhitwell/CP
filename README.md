@@ -17,16 +17,10 @@
 ### 1. Update and install prerequisites
 
 
+curl -s https://raw.githubusercontent.com/TomWhitwell/CP/main/install.sh | bash
 
 
 
-
-
-
-
-
-
-Say yes to any questions 
 
 ```bash
 
@@ -35,60 +29,15 @@ sudo apt update && sudo apt full-upgrade -y
 sudo apt install -y python3-pip python3-venv git build-essential flashrom
 # Turn on SPI  
 sudo raspi-config nonint do_spi 0
-# Clone 
+# Copy over the repository 
+git clone https://github.com/TomWhitwell/CP
+cd CP
+sudo cp computer-programmer.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable computer-programmer.service
+sudo systemctl start computer-programmer.service
 
 ````
-
----
-
-### 2. Enable SPI
-
-```
-sudo raspi-config nonint do_spi 0
-```
-
-Save and reboot:
-
-```bash
-sudo reboot
-```
-
-Verify SPI is available:
-
-```bash
-ls /dev/spidev0.0
-```
-
-You should see `/dev/spidev0.0`.
-
-> **Note:** You can also enable SPI from the Raspberry Pi Configuration GUI or `raspi-config`.
-
----
-
-### 3. Install flashrom
-
-```bash
-sudo apt install flashrom
-```
-
-Test:
-
-```bash
-sudo flashrom -p linux_spi:dev=/dev/spidev0.0,spispeed=12000 --flash-name
-```
-
-This should detect the connected flash chip.
-
----
-
-### 4. Create the project folder
-
-```bash
-mkdir -p ~/Programmer
-cd ~/Programmer
-```
-
-Place your `flash-complete.py` script here along with any supporting files.
 
 ---
 
@@ -110,7 +59,7 @@ Paste:
 
 ```
 [Unit]
-Description=Flash Programmer
+Description=Computer Programmer
 After=network.target
 
 [Service]
