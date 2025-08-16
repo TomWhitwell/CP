@@ -1,9 +1,64 @@
 # Computer Programmer 
 
 ---
+## Using the Computer Programmer 
 
-## Installation
+### Turn on power 
+- The programmer should run from any USB C adaptor (much less sensitive than the Workshop System)
+- Turn on the power switch. The Power LED will come on immediately
+- Some or all of the other LEDs may come on at random. Ignore them.  
+Wait 20-30 seconds for the system to boot up
+Watch out for a quick LED animation, then all the LEDs turn off 
 
+### Put in the cards 
+- You can set up the cards while waiting for the system to boot 
+- Put the source card in the source slot (if you want to delete the cards, just put in a blank card)
+- Put the cards to be written in other slots. You don't have to use all the slots. 
+
+### Check the cards 
+- Press CHECK 
+- The system checks the size on the source card and turns on the LED to indicate it's OK. 
+- Then it inspects each card slot and displays the outcome: 
+  - Card found, correct size = SLOW BLINK 
+  - Card found, faulty or incorrect size = FAST BLINK 
+  - No card found = LED OFF. 
+- At this point you can either: 
+  - Continue and write all the suitable cards 
+  - Swap out any incorrect cards and press CHECK again 
+
+### Write the cards 
+- Now press WRITE
+  - The system reads the source card - you'll see its LED flashing randomly, to indicate DATA
+  - If that is successful, it starts writing them one by one - a burst of DATA then the LED turns on to indicate it's finished. 
+  - Any error, reading or writing gives FAST BLINK on the card LED 
+- How long does it take? 
+  - 15 x 2Mb cards = Approx 50 seconds 
+  - 15 x 16Mb cards = Approx 10 minutes 
+- All the cards are ready when all the LEDs are ON. 
+
+### Troubleshooting 
+- The pushbuttons can be a bit insensitive 
+
+- By default the Computer Programmer works at 14MHz. 
+  - The speed is set by the tiny dip switches on the PCB. 
+    - 14MHZ = 0 1 1 0
+  - If you have any problems, try reducing the speed
+    - 8MHz = 1 1 0 0
+    - 2MHz = 0 0 0 0 
+
+- If the reader doesn't respond or the install has failed: 
+  - Login with SSH 
+  - `sudo systemctl status computer-programmer.service` should return the most recent logs and errors 
+  - Then just ask Tom 
+
+
+
+
+## Installation & Setup
+
+### 0. Board setup 
+- Don't forget to set the DIP switches 
+  - 14MHZ = 0 1 1 0 (1 to 4, UP = ON = 1)
 
 ### 1. Raspberry Pi Setup 
 
@@ -14,214 +69,20 @@
 - Log into the Raspberry Pi over WIFI from terminal using SSH - [full instructions](https://www.raspberrypi.com/documentation/computers/remote-access.html#ssh).  
 
 
-### 1. Update and install prerequisites
+### 2. Install and start the firmware 
 
-
+```
 curl -s https://raw.githubusercontent.com/TomWhitwell/CP/main/install.sh | bash
-
-
-
-
-```bash
-
-# Update the system and install basics 
-sudo apt update && sudo apt full-upgrade -y
-sudo apt install -y python3-pip python3-venv git build-essential flashrom
-# Turn on SPI  
-sudo raspi-config nonint do_spi 0
-# Copy over the repository 
-git clone https://github.com/TomWhitwell/CP
-cd CP
-sudo cp computer-programmer.service /etc/systemd/system/
-sudo systemctl daemon-reload
-sudo systemctl enable computer-programmer.service
-sudo systemctl start computer-programmer.service
-
-````
-
----
-
-### 5. Auto-start on boot with systemd
-
-Create a log directory:
-
-```bash
-mkdir -p ~/Programmer/logs
 ```
-
-Create the systemd service file:
-
-```bash
-sudo nano /etc/systemd/system/flash-programmer.service
-```
-
-Paste:
+You should see this output, with various log details: 
 
 ```
-[Unit]
-Description=Computer Programmer
-After=network.target
-
-[Service]
-ExecStart=/usr/bin/python3 /home/pi/Programmer/flash-complete.py
-WorkingDirectory=/home/pi/Programmer
-StandardOutput=append:/home/pi/Programmer/logs/flash-programmer.log
-StandardError=append:/home/pi/Programmer/logs/flash-programmer.log
-Restart=always
-User=pi
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Save and enable:
-
-```bash
-sudo systemctl daemon-reload
-sudo systemctl enable flash-programmer.service
-sudo systemctl start flash-programmer.service
-```
-
----
-
-### 6. Starting and stopping the service manually
-
-Start:
-
-```bash
-sudo systemctl start flash-programmer.service
-```
-
-Stop:
-
-```bash
-sudo systemctl stop flash-programmer.service
-```
-
-View logs:
-
-```bash
-tail -f ~/Programmer/logs/flash-programmer.log
-```
-
-If debugging, stop the service before running manually:
-
-```bash
-sudo systemctl stop flash-programmer.service
-sudo python3 flash-complete.py
-```
-
----
-
-## Usage
-
-1. **Power on** the device.
-
-   * LEDs will run a short animation on startup.
-   * Wait \~2 seconds before pressing buttons.
-2. **CHECK button (GPIO5)**:
-
-   * Scans all slots.
-   * Slot 0 is the source chip.
-   * Matching chips flash slow, mismatched or error flash fast, empty slots are off.
-3. **WRITE button (GPIO6)**:
-
-   * Reads slot 0 into `card.bin` (archived with a hash filename in `CardArchive/`).
-   * Writes to all matching chips, verifying after each write.
-   * Sets LEDs accordingly (ON = good, fast flash = failed verify).
-
----
-
-## Pinout Summary
-
-| Function      | GPIO | Physical Pin |
-| ------------- | ---- | ------------ |
-| 74HC595 Clock | 2    | 3            |
-| 74HC595 Latch | 3    | 5            |
-| 74HC595 Data  | 4    | 7            |
-| CHECK Button  | 5    | 29           |
-| WRITE Button  | 6    | 31           |
-| Demux A0      | 22   | 15           |
-| Demux A1      | 23   | 16           |
-| Demux A2      | 24   | 18           |
-| Demux A3      | 25   | 22           |
-| DIP1          | 16   | 36           |
-| DIP2          | 19   | 35           |
-| DIP3          | 20   | 38           |
-| DIP4          | 21   | 40           |
-
----
-
-## Troubleshooting
-
-### Busy GPIO pins
-
-If you see:
+🛠 Updating system...
+📦 Installing dependencies...
+🔌 Enabling SPI...
+💾 Cloning the repo...
+📂 Installing systemd service...
+✅ Setup complete.
 
 ```
-OSError: [Errno 16] Device or resource busy
-```
-
-It usually means another process is using the pins.
-Possible causes:
-
-* I²C is enabled and something is bound to GPIO2/3.
-* Another process is still holding those pins.
-
-To fully free pins GPIO2/3:
-
-```bash
-sudo nano /boot/firmware/config.txt
-```
-
-Add or uncomment:
-
-```
-dtparam=i2c_arm=off
-```
-
-Reboot.
-
-> Disabling I²C is **not required** unless you see the busy error.
-
----
-
-### Service won't start
-
-Run:
-
-```bash
-sudo systemctl status flash-programmer.service
-```
-
-and check the last few lines of:
-
-```bash
-tail -n 50 ~/Programmer/logs/flash-programmer.log
-```
-
----
-
-## Notes
-
-* `spispeed` in the script defaults to `12000` (12 MHz). You can adjust this if needed.
-* Ensure all chips are oriented correctly in their slots before starting.
-* Flashrom writes are destructive — double-check before writing to any chip.
-
-## to sync with a device 
-
-  xargs -n1 -I{} rsync -avz --exclude='.git/' --exclude='*.tmp' . prog1@MTM.local:/home/prog1/Programmer/
-
-
-## Setting drive pins high for testing: 
-
-Sets SPI CLK pin to A0 = SPI CLK - I may have accidentally changed it earlier 
-```
-pinctrl set 11 a0
-```
-Get list of all pin settings: 
-
-```
-pinctrl get 
-```
-
+The firmware should start immediately with a quick LED animation. 
