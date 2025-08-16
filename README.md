@@ -75,7 +75,7 @@ Watch out for a quick LED animation, then all the LEDs turn off
 ```
 curl -s https://raw.githubusercontent.com/TomWhitwell/CP/main/install.sh | bash
 ```
-You should see this output, with various log details: 
+You should see this output, with various log details and progress bars in between. It takes 5-10 minutes to complete: 
 
 ```
 🛠 Updating system...
@@ -86,4 +86,5 @@ You should see this output, with various log details:
 ✅ Setup complete.
 
 ```
-The firmware should start immediately with a quick LED animation. 
+The firmware should start once it's all finished with a quick LED animation. 
+If that doesn't happen, try running it again. 
