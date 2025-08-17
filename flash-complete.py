@@ -411,6 +411,7 @@ class FlashromWorker:
             print(f"[clone] Done. ok={successes}, failed={failures}, skipped={skipped}", flush=True)
 
         finally:
+            self.leds.set_status(0, BLINK_SLOW)
             self._busy.clear()
 
     def _do_read_source(self) -> bool:

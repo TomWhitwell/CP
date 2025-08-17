@@ -29,11 +29,11 @@ Watch out for a quick LED animation, then all the LEDs turn off
 ### Write the cards 
 - Now press WRITE
   - The system reads the source card - you'll see its LED flashing randomly, to indicate DATA
-  - If that is successful, it starts writing them one by one - a burst of DATA then the LED turns on to indicate it's finished. 
+  - If that is successful, it starts writing, then verifying them one by one - a burst of DATA then the LED turns on to indicate it's finished. 
   - Any error, reading or writing gives FAST BLINK on the card LED 
 - How long does it take? 
-  - 15 x 2Mb cards = Approx 50 seconds 
-  - 15 x 16Mb cards = Approx 10 minutes 
+  - 15 x 2Mb cards = Approx 5 minutes 
+  - 15 x 16Mb cards = Approx 60 minutes 
 - All the cards are ready when all the LEDs are ON. 
 
 ### Troubleshooting 
