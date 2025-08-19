@@ -90,4 +90,4 @@ You should see this output, with various log details and progress bars in betwee
 
 ```
 The firmware should start once it's all finished with a quick LED animation. 
-If that doesn't happen, try running it again. 
+If that doesn't happen, try running it again - sometimes when it's a big update it seems to forget to move past that part of the process. 
