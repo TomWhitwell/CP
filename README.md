@@ -76,7 +76,7 @@ Watch out for a quick LED animation, then all the LEDs turn off
 ### 2. Install and start the firmware 
 
 ```
-curl -s https://raw.githubusercontent.com/TomWhitwell/CP/main/install.sh | bash
+sudo curl -s https://raw.githubusercontent.com/TomWhitwell/CP/main/install.sh | bash
 ```
 You should see this output, with various log details and progress bars in between. It takes 5-10 minutes to complete: 
 
