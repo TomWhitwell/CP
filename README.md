@@ -1,5 +1,7 @@
 # Computer Programmer 
 
+https://youtube.com/shorts/0Sg8xTNHPjw
+
 ---
 ## Using the Computer Programmer 
 
