@@ -1,6 +1,6 @@
 # Computer Programmer 
 
-[WATCH THE VIDEO EXPLAINER](https://youtube.com/shorts/0Sg8xTNHPjw)
+[WATCH THE VIDEO EXPLAINER](https://youtu.be/MsQyA8dBaQw)
 ---
 ## Using the Computer Programmer 
 
